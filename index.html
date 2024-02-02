@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.css"
+      integrity="sha512-Y0MM+V6ymRKN2zStTqzQ227DWhhp4Mzdo6gnlRnuaNCbc+YN/ZH0sBCLTM4M0oSy9c9VKiCvd4Jk44aCLrNS5Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Credit Calculator</title>
+  </head>
+  <body>
+    <main>
+      <section class="section">
+        <div class="container">
+          <form id="creditForm">
+            <label for="loanAmount">Сума кредиту:</label>
+            <input
+              type="number"
+              id="loanAmount"
+              name="loanAmount"
+              min="1000"
+              max="100000"
+              step="1000"
+              required
+            />
+            <input
+              type="range"
+              id="loanAmountRange"
+              name="loanAmountRange"
+              min="1000"
+              max="100000"
+              step="1000"
+              oninput="updateLoanAmount()"
+            />
+
+            <label for="repaymentPeriod">Період погашення (днів):</label>
+            <input
+              type="number"
+              id="repaymentPeriod"
+              name="repaymentPeriod"
+              min="1"
+              max="365"
+              step="1"
+              required
+            />
+            <input
+              type="range"
+              id="repaymentPeriodRange"
+              name="repaymentPeriodRange"
+              min="1"
+              max="365"
+              step="1"
+              oninput="updateRepaymentPeriod()"
+            />
+
+            <button type="submit" class="btn">Отримати кредит</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <script src="./index.js"></script>
+  </body>
+</html>
