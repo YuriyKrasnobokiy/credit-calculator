@@ -21,53 +21,53 @@
   </head>
   <body>
     <main>
-      <section class="section">
-        <div class="container">
-          <form id="creditForm">
-            <label for="loanAmount">Сума кредиту:</label>
-            <input
-              type="number"
-              id="loanAmount"
-              name="loanAmount"
-              min="1000"
-              max="100000"
-              step="1000"
-              required
-            />
-            <input
-              type="range"
-              id="loanAmountRange"
-              name="loanAmountRange"
-              min="1000"
-              max="100000"
-              step="1000"
-              oninput="updateLoanAmount()"
-            />
+      <div class="container">
+        <form id="creditForm">
+          <label for="loanAmount">Сума кредиту:</label>
+          <input
+            type="number"
+            id="loanAmount"
+            name="loanAmount"
+            min="1000"
+            max="50000"
+            step="100"
+            value="1000"
+            required
+          />
+          <input
+            type="range"
+            id="loanAmountRange"
+            name="loanAmountRange"
+            min="1000"
+            max="50000"
+            step="100"
+            oninput="updateLoanAmount()"
+          />
 
-            <label for="repaymentPeriod">Період погашення (днів):</label>
-            <input
-              type="number"
-              id="repaymentPeriod"
-              name="repaymentPeriod"
-              min="1"
-              max="365"
-              step="1"
-              required
-            />
-            <input
-              type="range"
-              id="repaymentPeriodRange"
-              name="repaymentPeriodRange"
-              min="1"
-              max="365"
-              step="1"
-              oninput="updateRepaymentPeriod()"
-            />
+          <label for="repaymentPeriod">Період погашення (днів):</label>
+          <input
+            type="number"
+            id="repaymentPeriod"
+            name="repaymentPeriod"
+            min="7"
+            max="60"
+            step="1"
+            value="7"
+            required
+          />
+          <input
+            type="range"
+            id="repaymentPeriodRange"
+            name="repaymentPeriodRange"
+            min="7"
+            max="60"
+            step="1"
+            oninput="updateRepaymentPeriod()"
+          />
 
-            <button type="submit" class="btn">Отримати кредит</button>
-          </form>
-        </div>
-      </section>
+          <button type="submit">Отримати кредит</button>
+        </form>
+      </div>
     </main>
     <script src="./index.js"></script>
   </body>

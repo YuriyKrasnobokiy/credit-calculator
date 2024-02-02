@@ -22,7 +22,8 @@ body {
 }
 
 #creditForm {
-  width: 420px;
+  width: 100%;
+  max-width: 420px;
   margin: 0 auto;
 }
 
@@ -53,13 +54,8 @@ button:hover {
 }
 
 .container {
-  width: 1200px;
-  padding-left: 15px;
-  padding-right: 15px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
   margin: 0 auto;
-}
-
-.section {
-  padding-top: 94px;
-  padding-bottom: 94px;
 }
