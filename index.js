@@ -24,8 +24,9 @@ resetInputs();
 creditForm.addEventListener("submit", (e) => {
   e.preventDefault();
   if (validateForm()) {
-    resetInputs();
+    creditCalculate();
   }
+  resetInputs();
 });
 
 loanAmountRange.addEventListener("input", updateLoanAmount);
@@ -52,12 +53,24 @@ function validateForm() {
     repaymentPeriod > 60
   ) {
     alert(ERROR_MESSAGE);
-    resetInputs();
     return false;
   }
   alert(SUCCESS_MESSAGE);
-  resetInputs();
   return true;
+}
+
+function creditCalculate() {
+  const loanAmount = parseFloat(loanAmountInput.value);
+  const repaymentPeriod = parseFloat(repaymentPeriodInput.value);
+  const interestRate = 2.2;
+
+  const dailyRepayment =
+    (loanAmount + loanAmount * (interestRate / 100) * repaymentPeriod) /
+    repaymentPeriod;
+  const totalRepayment = dailyRepayment * repaymentPeriod;
+
+  console.log(dailyRepayment);
+  console.log(totalRepayment);
 }
 
 function resetInputs() {
