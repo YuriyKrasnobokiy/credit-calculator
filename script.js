@@ -2,11 +2,11 @@ const loanAmountInput = document.querySelector("#loanAmount");
 const loanAmountRange = document.querySelector("#loanAmountRange");
 const repaymentPeriodInput = document.querySelector("#repaymentPeriod");
 const repaymentPeriodRange = document.querySelector("#repaymentPeriodRange");
+const resultText = document.querySelector(".resultText");
 const creditForm = document.querySelector("#creditForm");
 const btn = document.querySelector(".btn");
-const SUCCESS_MESSAGE = "✅ Кредит отримано!";
 const ERROR_MESSAGE =
-  "❌ Введено невалідне значення! Сума кредиту має бути не менше 1000грн або більшою за 50000грн. Строк погашення має бути не менше 7 днів та не більше 60днів. Будь-ласка перевірте введені дані";
+  "❌ Введено невалідне значення! Будь-ласка перевірте введені дані";
 
 ////Отримання початкових значень інпутів у форматі числа////
 const initialLoanAmount = parseFloat(loanAmountInput.value);
@@ -26,7 +26,6 @@ creditForm.addEventListener("submit", (e) => {
   if (validateForm()) {
     creditCalculate();
   }
-  resetInputs();
 });
 
 loanAmountRange.addEventListener("input", updateLoanAmount);
@@ -34,10 +33,16 @@ repaymentPeriodRange.addEventListener("input", updateRepaymentPeriod);
 
 function updateLoanAmount() {
   loanAmountInput.value = loanAmountRange.value;
+  if (validateForm()) {
+    creditCalculate();
+  }
 }
 
 function updateRepaymentPeriod() {
   repaymentPeriodInput.value = repaymentPeriodRange.value;
+  if (validateForm()) {
+    creditCalculate();
+  }
 }
 
 function validateForm() {
@@ -52,10 +57,11 @@ function validateForm() {
     repaymentPeriod < 7 ||
     repaymentPeriod > 60
   ) {
-    alert(ERROR_MESSAGE);
+    btn.disabled = true;
+    resultText.textContent = ERROR_MESSAGE;
     return false;
   }
-  alert(SUCCESS_MESSAGE);
+  btn.disabled = false;
   return true;
 }
 
@@ -64,13 +70,15 @@ function creditCalculate() {
   const repaymentPeriod = parseFloat(repaymentPeriodInput.value);
   const interestRate = 2.2;
 
-  const dailyRepayment =
+  const dailyRepayment = Math.round(
     (loanAmount + loanAmount * (interestRate / 100) * repaymentPeriod) /
-    repaymentPeriod;
-  const totalRepayment = dailyRepayment * repaymentPeriod;
+      repaymentPeriod,
+  );
+  const totalRepayment = Math.round(dailyRepayment * repaymentPeriod);
 
-  console.log(dailyRepayment);
-  console.log(totalRepayment);
+  resultText.innerHTML = `Денна сума погашення: ${dailyRepayment.toFixed(
+    2,
+  )} грн <br> Загальна сума: ${totalRepayment.toFixed(2)} грн`;
 }
 
 function resetInputs() {

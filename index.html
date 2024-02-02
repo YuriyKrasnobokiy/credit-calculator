@@ -17,13 +17,14 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./styles.css" />
     <title>Credit Calculator</title>
   </head>
   <body>
     <main>
       <div class="container">
         <form id="creditForm">
+          <h2 class="resultText"></h2>
           <label for="loanAmount">Сума кредиту:</label>
           <input
             type="number"
@@ -61,9 +62,11 @@
           />
 
           <button type="submit" class="btn">Отримати кредит</button>
+
+          <p class="errorMessage"></p>
         </form>
       </div>
     </main>
-    <script src="./index.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>
