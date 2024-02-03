@@ -7,9 +7,11 @@ const creditForm = document.getElementById("credit_form");
 const btn = document.querySelector(".btn");
 const ERROR_MESSAGE =
   "❌ Введено невалідне значення! Будь-ласка перевірте введені дані";
+const interestRate = 2.2;
 
 creditForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
   if (validateForm()) {
     creditCalculate();
   }
@@ -17,21 +19,22 @@ creditForm.addEventListener("submit", (e) => {
 
 loanAmountInput.addEventListener("change", updateSliders);
 repaymentPeriodInput.addEventListener("change", updateSliders);
+loanAmountRange.addEventListener("input", updateInputs);
+repaymentPeriodRange.addEventListener("input", updateInputs);
 
 function updateSliders() {
   loanAmountRange.value = loanAmountInput.value;
   repaymentPeriodRange.value = repaymentPeriodInput.value;
+
   if (validateForm()) {
     creditCalculate();
   }
 }
 
-loanAmountRange.addEventListener("input", updateInputs);
-repaymentPeriodRange.addEventListener("input", updateInputs);
-
 function updateInputs() {
   loanAmountInput.value = loanAmountRange.value;
   repaymentPeriodInput.value = repaymentPeriodRange.value;
+
   if (validateForm()) {
     creditCalculate();
   }
@@ -39,6 +42,7 @@ function updateInputs() {
 
 function validateForm() {
   const loanAmount = parseFloat(loanAmountInput.value);
+
   const repaymentPeriod = parseFloat(repaymentPeriodInput.value);
 
   if (
@@ -50,22 +54,26 @@ function validateForm() {
     repaymentPeriod > 60
   ) {
     btn.disabled = true;
+
     resultText.textContent = ERROR_MESSAGE;
+
     return false;
   }
   btn.disabled = false;
+
   return true;
 }
 
 function creditCalculate() {
   let loanAmount = parseFloat(loanAmountInput.value);
+
   let repaymentPeriod = parseFloat(repaymentPeriodInput.value);
-  const interestRate = 2.2;
 
   let dailyRepayment = Math.round(
     (loanAmount + loanAmount * (interestRate / 100) * repaymentPeriod) /
       repaymentPeriod,
   );
+
   let totalRepayment = Math.round(dailyRepayment * repaymentPeriod);
 
   resultText.innerHTML = `Денна сума погашення: ${dailyRepayment.toFixed(
