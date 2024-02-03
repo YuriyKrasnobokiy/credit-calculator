@@ -23,30 +23,32 @@
   <body>
     <main>
       <div class="container">
-        <form id="creditForm">
+        <form id="credit_form">
           <h2 class="resultText"></h2>
-          <label for="loanAmount">Сума кредиту:</label>
+          <label for="loan_amount">Сума кредиту:</label>
           <input
             type="number"
-            id="loanAmount"
+            id="loan_amount"
             name="loanAmount"
+            placeholder="Введіть суму кредиту"
+            max="50000"
             step="100"
             value="1000"
             required
           />
           <input
             type="range"
-            id="loanAmountRange"
+            id="loan_amount_range"
             name="loanAmountRange"
             step="100"
             max="50000"
-            oninput="updateLoanAmount()"
+            value="1000"
           />
 
-          <label for="repaymentPeriod">Період погашення (днів):</label>
+          <label for="repayment_period">Період погашення (днів):</label>
           <input
             type="number"
-            id="repaymentPeriod"
+            id="repayment_period"
             name="repaymentPeriod"
             step="1"
             value="7"
@@ -54,11 +56,11 @@
           />
           <input
             type="range"
-            id="repaymentPeriodRange"
+            id="repayment_period_range"
             name="repaymentPeriodRange"
             step="1"
             max="60"
-            oninput="updateRepaymentPeriod()"
+            value="7"
           />
 
           <button type="submit" class="btn">Отримати кредит</button>

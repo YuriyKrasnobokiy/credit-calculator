@@ -1,25 +1,12 @@
-const loanAmountInput = document.querySelector("#loanAmount");
-const loanAmountRange = document.querySelector("#loanAmountRange");
-const repaymentPeriodInput = document.querySelector("#repaymentPeriod");
-const repaymentPeriodRange = document.querySelector("#repaymentPeriodRange");
+const loanAmountInput = document.getElementById("loan_amount");
+const loanAmountRange = document.getElementById("loan_amount_range");
+const repaymentPeriodInput = document.getElementById("repayment_period");
+const repaymentPeriodRange = document.getElementById("repayment_period_range");
 const resultText = document.querySelector(".resultText");
-const creditForm = document.querySelector("#creditForm");
+const creditForm = document.getElementById("credit_form");
 const btn = document.querySelector(".btn");
 const ERROR_MESSAGE =
   "❌ Введено невалідне значення! Будь-ласка перевірте введені дані";
-
-////Отримання початкових значень інпутів у форматі числа////
-const initialLoanAmount = parseFloat(loanAmountInput.value);
-const initialRepaymentPeriod = parseFloat(repaymentPeriodInput.value);
-
-////Збереження початкових значень інпутів////
-const initialValues = {
-  loanAmount: initialLoanAmount,
-  repaymentPeriod: initialRepaymentPeriod,
-};
-
-////Встановлення початкових значень інпутів при запуску сторінки////
-resetInputs();
 
 creditForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -28,17 +15,22 @@ creditForm.addEventListener("submit", (e) => {
   }
 });
 
-loanAmountRange.addEventListener("input", updateLoanAmount);
-repaymentPeriodRange.addEventListener("input", updateRepaymentPeriod);
+loanAmountInput.addEventListener("change", updateSliders);
+repaymentPeriodInput.addEventListener("change", updateSliders);
 
-function updateLoanAmount() {
-  loanAmountInput.value = loanAmountRange.value;
+function updateSliders() {
+  loanAmountRange.value = loanAmountInput.value;
+  repaymentPeriodRange.value = repaymentPeriodInput.value;
   if (validateForm()) {
     creditCalculate();
   }
 }
 
-function updateRepaymentPeriod() {
+loanAmountRange.addEventListener("input", updateInputs);
+repaymentPeriodRange.addEventListener("input", updateInputs);
+
+function updateInputs() {
+  loanAmountInput.value = loanAmountRange.value;
   repaymentPeriodInput.value = repaymentPeriodRange.value;
   if (validateForm()) {
     creditCalculate();
@@ -66,24 +58,17 @@ function validateForm() {
 }
 
 function creditCalculate() {
-  const loanAmount = parseFloat(loanAmountInput.value);
-  const repaymentPeriod = parseFloat(repaymentPeriodInput.value);
+  let loanAmount = parseFloat(loanAmountInput.value);
+  let repaymentPeriod = parseFloat(repaymentPeriodInput.value);
   const interestRate = 2.2;
 
-  const dailyRepayment = Math.round(
+  let dailyRepayment = Math.round(
     (loanAmount + loanAmount * (interestRate / 100) * repaymentPeriod) /
       repaymentPeriod,
   );
-  const totalRepayment = Math.round(dailyRepayment * repaymentPeriod);
+  let totalRepayment = Math.round(dailyRepayment * repaymentPeriod);
 
   resultText.innerHTML = `Денна сума погашення: ${dailyRepayment.toFixed(
     2,
   )} грн <br> Загальна сума: ${totalRepayment.toFixed(2)} грн`;
-}
-
-function resetInputs() {
-  loanAmountInput.value = initialValues.loanAmount;
-  loanAmountRange.value = initialValues.loanAmount;
-  repaymentPeriodInput.value = initialValues.repaymentPeriod;
-  repaymentPeriodRange.value = initialValues.repaymentPeriod;
 }
